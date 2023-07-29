@@ -8,6 +8,7 @@ import BotDetails from "./components/BotDetails";
 function App() {
   const [bots, setBots] = useState([]);
   const [army, setArmy] = useState([]);
+  const [filteredBots, setFilteredBots] = useState([]);
 
   useEffect(() => {
     fetchBots();
@@ -16,7 +17,10 @@ function App() {
   const fetchBots = () => {
     fetch("http://localhost:3000/bots")
       .then((response) => response.json())
-      .then((bots) => setBots(bots))
+      .then((bots) => {
+        setBots(bots);
+        setFilteredBots(bots);
+      })
       .catch((error) => console.error("Error fetching bot data: ", error));
   };
 
@@ -47,6 +51,18 @@ function App() {
       });
   };
 
+  const sortBots = (field) => {
+    // Implement sorting logic based on the 'field' (e.g., health, damage, armor)
+    const sortedBots = [...filteredBots].sort((a, b) => a[field] - b[field]);
+    setFilteredBots(sortedBots);
+  };
+
+  const filterBotsByClass = (botClass) => {
+    // Implement filtering logic based on bot class
+    const filteredByClass = bots.filter((bot) => bot.bot_class === botClass);
+    setFilteredBots(filteredByClass);
+  };
+
   return (
     <Router>
       <div>
@@ -55,7 +71,14 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<BotCollection bots={bots} enlistBot={enlistBot} />}
+            element={
+              <BotCollection
+                bots={filteredBots}
+                enlistBot={enlistBot}
+                sortBots={sortBots}
+                filterBotsByClass={filterBotsByClass}
+              />
+            }
           />
           <Route
             path="/your-bot-army"
