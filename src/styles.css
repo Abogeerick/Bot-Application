@@ -1,0 +1,108 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #333;
+}
+
+/* Navbar styles */
+nav {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+a.active {
+  font-weight: bold;
+}
+
+/* BotCollection styles */
+#bot-collection {
+  margin-top: 20px;
+}
+
+#bot-collection ul {
+  padding: 0;
+}
+
+#bot-collection li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+#bot-collection li img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+/* YourBotArmy styles */
+#your-bot-army {
+  margin-top: 20px;
+}
+
+#your-bot-army ul {
+  padding: 0;
+}
+
+#your-bot-army li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+#your-bot-army li img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+/* BotDetails styles */
+#bot-details {
+  margin-top: 20px;
+}
+
+#bot-details img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+#bot-details button {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#bot-details button:hover {
+  background-color: darkred;
+}

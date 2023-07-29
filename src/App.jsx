@@ -1,6 +1,6 @@
-// src/App.js
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import BotCollection from "./components/BotCollection";
 import YourBotArmy from "./components/YourBotArmy";
 import BotDetails from "./components/BotDetails";
@@ -10,7 +10,6 @@ function App() {
   const [army, setArmy] = useState([]);
 
   useEffect(() => {
-    // Fetch bot data from the backend and update the state
     fetchBots();
   }, []);
 
@@ -22,23 +21,22 @@ function App() {
   };
 
   const enlistBot = (bot) => {
-    // Add the bot to the army state
-    setArmy([...army, bot]);
+    if (!army.some((armyBot) => armyBot.id === bot.id)) {
+      setArmy([...army, bot]);
+    }
   };
 
   const releaseBot = (botId) => {
-    // Remove the bot from the army state
     setArmy(army.filter((bot) => bot.id !== botId));
   };
 
   const deleteBot = (botId) => {
-    // Remove the bot from the backend and update the army state
     fetch(`http://localhost:3000/bots/${botId}`, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
-          // Successful deletion from the backend, now release the bot from the army
+          setBots(bots.filter((bot) => bot.id !== botId));
           releaseBot(botId);
         } else {
           throw new Error("Failed to delete bot.");
@@ -52,10 +50,22 @@ function App() {
   return (
     <Router>
       <div>
+        <Navbar />
         <h1>Bot Battlr</h1>
-        <Route exact path="/" render={() => <BotCollection bots={bots} enlistBot={enlistBot} />} />
-        <Route path="/your-bot-army" render={() => <YourBotArmy army={army} releaseBot={releaseBot} />} />
-        <Route path="/bots/:id" render={(props) => <BotDetails {...props} deleteBot={deleteBot} />} />
+        <Routes>
+          <Route
+            path="/"
+            element={<BotCollection bots={bots} enlistBot={enlistBot} />}
+          />
+          <Route
+            path="/your-bot-army"
+            element={<YourBotArmy army={army} releaseBot={releaseBot} />}
+          />
+          <Route
+            path="/bots/:id"
+            element={<BotDetails bots={bots} deleteBot={deleteBot} />}
+          />
+        </Routes>
       </div>
     </Router>
   );

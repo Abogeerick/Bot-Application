@@ -1,6 +1,6 @@
-// src/components/BotCollection.js
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles.css";
 
 function BotCollection({ bots, enlistBot }) {
   return (
@@ -13,6 +13,7 @@ function BotCollection({ bots, enlistBot }) {
               {bot.name} - {bot.type}
             </Link>
             <button onClick={() => enlistBot(bot)}>Enlist</button>
+            <img src={bot.avatar_url} alt={`Avatar of ${bot.name}`} />
           </li>
         ))}
       </ul>
