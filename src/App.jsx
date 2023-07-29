@@ -52,13 +52,11 @@ function App() {
   };
 
   const sortBots = (field) => {
-    // Implement sorting logic based on the 'field' (e.g., health, damage, armor)
     const sortedBots = [...filteredBots].sort((a, b) => a[field] - b[field]);
     setFilteredBots(sortedBots);
   };
 
   const filterBotsByClass = (botClass) => {
-    // Implement filtering logic based on bot class
     const filteredByClass = bots.filter((bot) => bot.bot_class === botClass);
     setFilteredBots(filteredByClass);
   };

@@ -1,14 +1,14 @@
 // components/SortBar.js
 import React from "react";
+import SortOptions from "./SortOptions"; // Import the SortOptions component
 
-function SortBar({ onSort }) {
+const SortBar = ({ onSort }) => {
   return (
     <div>
-      <button onClick={() => onSort("health")}>Sort by Health</button>
-      <button onClick={() => onSort("damage")}>Sort by Damage</button>
-      <button onClick={() => onSort("armor")}>Sort by Armor</button>
+      <h2>Sort Bots</h2>
+      <SortOptions onSort={onSort} /> {/* Use the SortOptions component for sorting */}
     </div>
   );
-}
+};
 
 export default SortBar;
