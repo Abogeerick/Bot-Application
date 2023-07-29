@@ -1,7 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import axios from "axios";
 import BotCollection from "./components/BotCollection";
 import YourBotArmy from "./components/YourBotArmy";
 import BotDetails from "./components/BotDetails";
@@ -15,13 +14,11 @@ function App() {
     fetchBots();
   }, []);
 
-  const fetchBots = async () => {
-    try {
-      const response = await axios.get("http://localhost:8001/bots");
-      setBots(response.data);
-    } catch (error) {
-      console.error("Error fetching bot data: ", error);
-    }
+  const fetchBots = () => {
+    fetch("http://localhost:3000/bots")
+      .then((response) => response.json())
+      .then((bots) => setBots(bots))
+      .catch((error) => console.error("Error fetching bot data: ", error));
   };
 
   const enlistBot = (bot) => {
@@ -34,14 +31,22 @@ function App() {
     setArmy(army.filter((bot) => bot.id !== botId));
   };
 
-  const deleteBot = async (botId) => {
+  const deleteBot = (botId) => {
     // Remove the bot from the backend and update the army state
-    try {
-      await axios.delete(`http://localhost:8001/bots/${botId}`);
-      releaseBot(botId);
-    } catch (error) {
-      console.error("Error deleting bot: ", error);
-    }
+    fetch(`http://localhost:3000/bots/${botId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Successful deletion from the backend, now release the bot from the army
+          releaseBot(botId);
+        } else {
+          throw new Error("Failed to delete bot.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting bot: ", error);
+      });
   };
 
   return (
