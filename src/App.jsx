@@ -15,7 +15,7 @@ function App() {
   }, []);
 
   const fetchBots = () => {
-    fetch("http://localhost:3000/bots")
+    fetch("https://test-api-azke.onrender.com/bots")
       .then((response) => response.json())
       .then((bots) => {
         setBots(bots);
@@ -35,7 +35,7 @@ function App() {
   };
 
   const deleteBot = (botId) => {
-    fetch(`http://localhost:3000/bots/${botId}`, {
+    fetch(`https://test-api-azke.onrender.com/bots/${botId}`, {
       method: "DELETE",
     })
       .then((response) => {
