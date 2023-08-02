@@ -19,7 +19,7 @@ To run this project, you need the following:
 - Git installed on your machine to clone the repository.
 - Code editor (e.g., VS Code) for viewing and editing the code.
 - Node.js installed to install and manage dependencies.
-- JSON Server installed globally for simulating a server.
+
 
 ## Installation
 
@@ -37,11 +37,7 @@ To run this project, you need the following:
 
 ## Usage
 
-1. Ensure the JSON Server is running by executing the following command in your terminal:
-```bash
-     $ json-server --watch db.json
-```
-2. Start the React development server by running:
+1. Start the React development server by running:
 ```bash
      $ npm run dev
 ```
@@ -50,7 +46,7 @@ To run this project, you need the following:
 As a user, you can:
 
 1. View a collection of bots with their details (name, type, health, damage, armor, bot class, and catchphrase).
-2. Enlist a bot into your army by clicking on the "Enlist" button on the bot's card.
+2. Enlist a bot into your army by clicking on the "Enlist" button on the bot's card.The army section is at the top right of the home page whereby clicking into it will lead you to your enlisted bots.
 3. View your bot army and release bots from your army.
 4. Delete a bot from the bot collection (Note: The deletion is not persisted to the backend in core deliverables).
 5. Sort bots by various fields such as health, damage, and armor.
